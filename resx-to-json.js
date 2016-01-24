@@ -76,3 +76,7 @@ ResxToJsonConverter.prototype.fromResxFile =
       return self.fromXmlString(fileContents, locale, callback);
     });
   };
+
+module.exports = {
+  Converter: ResxToJsonConverter,
+};
