@@ -5,8 +5,34 @@ var path = require('path');
 var _ = require('lodash');
 var fs = require('fs');
 
+function nggettextLocaleFormatter(locale) {
+  if (locale.length > 2) {
+    var split = locale.split('-');
+    locale = split[0].toLowerCase() + '_' + split[1].toUpperCase();
+  }
+  return locale;
+}
+
+function defaultLocaleFormatter(locale) {
+  return locale;
+}
+
 function ResxToJsonConverter(options) {
-  this.options = _.defaults(options, {defaultLocale: 'en'});
+  this.options = _.defaults(options, {
+    defaultLocale: 'en',
+    localeFormat: 'nggettext',
+  });
+  switch (this.options.localeFormat) {
+    case 'nggettext': {
+      this.localeFormatter = nggettextLocaleFormatter;
+      break;
+    }
+
+    default: {
+      this.localeFormatter = defaultLocaleFormatter;
+      break;
+    }
+  }
 }
 
 ResxToJsonConverter.prototype.fromXmlString =
@@ -36,11 +62,7 @@ ResxToJsonConverter.prototype.determineLocale =
     } else {
       locale = locale.substring(1);
     }
-    if (locale.length > 2) {
-      var split = locale.split('-');
-      locale = split[0].toLowerCase() + '_' + split[1].toUpperCase();
-    }
-    return locale;
+    return this.localeFormatter(locale);
   };
 
 ResxToJsonConverter.prototype.fromResxFile =
