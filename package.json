@@ -1,0 +1,37 @@
+{
+  "name": "resx-to-json",
+  "version": "0.1.0",
+  "description": "Converts .resx files containing localized strings to JSON format",
+  "main": "./resx-to-json.js",
+  "bin": {
+    "resx-to-json": "./bin/resx-to-json"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwittevrongel/resx-to-json.git"
+  },
+  "keywords": [
+    "resx",
+    "json"
+  ],
+  "author": "Jeremiah Wittevrongel",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/jwittevrongel/resx-to-json/issues"
+  },
+  "homepage": "https://github.com/jwittevrongel/resx-to-json#readme",
+  "dependencies": {
+    "async": "^1.5.2",
+    "lodash": "^4.0.0",
+    "xml2js": "^0.4.16"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "jshint": "^2.9.1"
+  }
+}
