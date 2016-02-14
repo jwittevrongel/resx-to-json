@@ -27,13 +27,13 @@ function ResxToJsonConverter(options) {
   }
 }
 
-ResxToJsonConverter.prototype.fromXmlString = ConverterFromXmlString;
+ResxToJsonConverter.prototype.fromString = ConverterFromString;
 ResxToJsonConverter.prototype.determineLocale = ConverterDetermineLocale;
 ResxToJsonConverter.prototype.fromResxFile = ConverterFromResxFile;
 
-function ConverterFromXmlString(xmlString, locale, callback) {
+function ConverterFromString(buffer, locale, callback) {
   var parser = new xml2js.Parser();
-  parser.parseString(xmlString, function(err, parsed) {
+  parser.parseString(buffer, function(err, parsed) {
     if (err) {
       return callback(err, null);
     }
@@ -66,7 +66,7 @@ function ConverterFromResxFile(resxFilePath, callback) {
     if (err) {
       return callback(err, null);
     }
-    return self.fromXmlString(fileContents, locale, callback);
+    return self.fromString(fileContents, locale, callback);
   });
 }
 
