@@ -44,4 +44,54 @@ describe('resx-to-json', function() {
       formattedLocale.should.equal('en-us');
     });
   });
+
+  describe('#Converter.fromResxFile', function() {
+    var converter = new resxToJson.Converter();
+
+    it('should handle unicode correctly', function(testDone) {
+      converter.fromResxFile(__dirname + '/YesNo.zh.resx', completed);
+      function completed(err, result) {
+        should.not.exist(err);
+        result.should.have.property('zh');
+        result.zh.should.have.property('GENERAL_Yes').eql('是');
+        result.zh.should.have.property('GENERAL_No').eql('没有');
+        testDone();
+      }
+    });
+
+    it('should process default language correctly', function(testDone) {
+      converter.fromResxFile(__dirname + '/YesNo.resx', completed);
+      function completed(err, result) {
+        should.not.exist(err);
+        result.should.have.property('en');
+        result.en.should.have.property('GENERAL_Yes').eql('Yes');
+        result.en.should.have.property('GENERAL_No').eql('No');
+        testDone();
+      }
+    });
+
+    it('should process default language correctly', function(testDone) {
+      converter.fromResxFile(__dirname + '/YesNo.resx', completed);
+      function completed(err, result) {
+        should.not.exist(err);
+        result.should.have.property('en');
+        result.en.should.have.property('GENERAL_Yes').eql('Yes');
+        result.en.should.have.property('GENERAL_No').eql('No');
+        testDone();
+      }
+    });
+
+    it('should process country and language correctly', function(testDone) {
+      converter.fromResxFile(__dirname + '/YesNo.fr-CA.resx', completed);
+      function completed(err, result) {
+        should.not.exist(err);
+        result.should.have.property('fr_CA');
+        // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+        result.fr_CA.should.have.property('GENERAL_Yes').eql('Oui');
+        result.fr_CA.should.have.property('GENERAL_No').eql('Non');
+        // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+        testDone();
+      }
+    });
+  });
 });
