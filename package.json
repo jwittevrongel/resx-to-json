@@ -1,8 +1,8 @@
 {
   "name": "resx-to-json",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Converts .resx files containing localized strings to JSON format",
-  "main": "./resx-to-json.js",
+  "main": "./index.js",
   "bin": {
     "resx-to-json": "./bin/resx-to-json"
   },
